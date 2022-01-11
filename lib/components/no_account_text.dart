@@ -6,7 +6,7 @@ import '../constants.dart';
 import '../size_config.dart';
 
 class NoAccountText extends StatelessWidget {
-  const NoAccountText({Key? key}) : super(key: key);
+  const NoAccountText({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

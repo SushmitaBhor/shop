@@ -1,35 +1,47 @@
+import 'package:avoid_keyboard/avoid_keyboard.dart';
 import 'package:flutter/material.dart';
 
 import '../../../constants.dart';
 import '../../../size_config.dart';
 
 class SplashContent extends StatelessWidget {
-  const SplashContent({Key? key, required this.text, required this.image})
+  SplashContent({Key key, @required this.text, @required this.image})
       : super(key: key);
-  final String text, image;
+  String text, image;
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Spacer(),
-        Text(
-          'TOKOTO',
-          style: TextStyle(
-              fontSize: getProportionateScreenWidth((36)),
-              color: kPrimaryColor,
-              fontWeight: FontWeight.bold),
+    return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+      onPanDown: (_) {
+        FocusScope.of(context).unfocus();
+      },
+      child: AvoidKeyboard(
+        spacing: 40,
+        child: SingleChildScrollView(
+          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+          child: Column(
+            children: [
+              Text(
+                'TOKOTO',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    fontSize: getProportionateScreenWidth((36)),
+                    color: kPrimaryColor,
+                    fontWeight: FontWeight.bold),
+              ),
+              Text(
+                text,
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 40),
+              Image(
+                  image: AssetImage(image),
+                  fit: BoxFit.cover,
+                  height: getProportionateScreenHeight(265))
+            ],
+          ),
         ),
-        Text(
-          text,
-          textAlign: TextAlign.center,
-        ),
-        Spacer(flex: 2),
-        Image.asset(
-          image,
-          height: getProportionateScreenHeight(265),
-          width: getProportionateScreenWidth(235),
-        )
-      ],
+      ),
     );
   }
 }

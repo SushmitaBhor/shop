@@ -4,7 +4,7 @@ import '../constants.dart';
 import '../size_config.dart';
 
 class DefaultButton extends StatelessWidget {
-  const DefaultButton({Key? key, required this.text, required this.press})
+  const DefaultButton({Key key, @required this.text, @required this.press})
       : super(key: key);
   final String text;
   final Function press;

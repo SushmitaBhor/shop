@@ -1,3 +1,4 @@
+import 'package:avoid_keyboard/avoid_keyboard.dart';
 import 'package:flutter/material.dart';
 import 'package:shop_app/screens/sign_in/sign_in_screen.dart';
 import '/components/default_button.dart';
@@ -6,7 +7,7 @@ import 'package:shop_app/size_config.dart';
 import '../components/splash_content.dart';
 
 class Body extends StatefulWidget {
-  const Body({Key? key}) : super(key: key);
+  const Body({Key key}) : super(key: key);
 
   @override
   _BodyState createState() => _BodyState();
@@ -31,13 +32,15 @@ class _BodyState extends State<Body> {
   ];
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: SizedBox(
-        width: double.infinity,
-        child: Column(
-          children: [
-            Expanded(
-                flex: 3,
+    return AvoidKeyboard(
+      spacing: 40,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Column(
+            children: [
+              Container(
+                height: 400,
                 child: PageView.builder(
                     onPageChanged: (value) {
                       setState(() {
@@ -48,38 +51,31 @@ class _BodyState extends State<Body> {
                     itemBuilder: (context, index) => SplashContent(
                           text: splashData[index]["text"].toString(),
                           image: splashData[index]["image"].toString(),
-                        ))),
-            Expanded(
-                flex: 2,
-                child: Padding(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: getProportionateScreenWidth(20)),
-                  child: Column(
-                    children: [
-                      Spacer(),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: List.generate(splashData.length,
-                            (index) => buildDot(index: index)),
-                      ),
-                      Spacer(flex: 3),
-                      DefaultButton(
-                        text: 'Continue',
-                        press: () {
-                          Navigator.pushNamed(context, SignInScreen.routeName);
-                        },
-                      ),
-                      Spacer()
-                    ],
-                  ),
-                ))
-          ],
-        ),
+                        )),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: List.generate(
+                    splashData.length, (index) => buildDot(index: index)),
+              ),
+            ],
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(
+                horizontal: getProportionateScreenWidth(20), vertical: 20),
+            child: DefaultButton(
+              text: 'Continue',
+              press: () {
+                Navigator.pushNamed(context, SignInScreen.routeName);
+              },
+            ),
+          ),
+        ],
       ),
     );
   }
 
-  AnimatedContainer buildDot({required int index}) {
+  AnimatedContainer buildDot({@required int index}) {
     return AnimatedContainer(
       duration: kAnimationDuration,
       margin: const EdgeInsets.only(right: 5),

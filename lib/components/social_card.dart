@@ -4,7 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import '../size_config.dart';
 
 class SocialCard extends StatelessWidget {
-  const SocialCard({Key? key, required this.icon, required this.press})
+  const SocialCard({Key key, @required this.icon, @required this.press})
       : super(key: key);
   final String icon;
   final Function press;

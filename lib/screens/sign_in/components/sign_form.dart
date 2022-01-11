@@ -9,7 +9,7 @@ import '../../../constants.dart';
 import '../../../size_config.dart';
 
 class SignForm extends StatefulWidget {
-  const SignForm({Key? key}) : super(key: key);
+  const SignForm({Key key}) : super(key: key);
 
   @override
   _SignFormState createState() => _SignFormState();
@@ -17,19 +17,19 @@ class SignForm extends StatefulWidget {
 
 class _SignFormState extends State<SignForm> {
   final _formKey = GlobalKey<FormState>();
-  late String email;
-  late String password;
+  String email;
+  String password;
   bool remember = false;
   final List<String> errors = [];
 
-  void addError({required String error}) {
+  void addError({@required String error}) {
     if (!errors.contains(error))
       setState(() {
         errors.add(error);
       });
   }
 
-  void removeError({required String error}) {
+  void removeError({@required String error}) {
     if (!errors.contains(error))
       setState(() {
         errors.remove(error);
@@ -59,7 +59,7 @@ class _SignFormState extends State<SignForm> {
                   activeColor: kPrimaryColor,
                   onChanged: (value) {
                     setState(() {
-                      remember = value!;
+                      remember = value;
                     });
                   }),
               const Text("Remember me"),
@@ -80,7 +80,7 @@ class _SignFormState extends State<SignForm> {
           DefaultButton(
               text: "Continue",
               press: () {
-                if (_formKey.currentState!.validate()) {
+                if (_formKey.currentState.validate()) {
                   _formKey.currentState?.save();
                   Navigator.pushNamed(context, LoginSuccessScreen.routeName);
                 }
@@ -93,7 +93,7 @@ class _SignFormState extends State<SignForm> {
   TextFormField buildEmailFormField() {
     return TextFormField(
         keyboardType: TextInputType.emailAddress,
-        onSaved: (newValue) => email = newValue!,
+        onSaved: (newValue) => email = newValue,
         onChanged: (value) {
           if (value.isNotEmpty && !errors.contains(kEmailNullError)) {
             setState(() {
@@ -108,7 +108,7 @@ class _SignFormState extends State<SignForm> {
           return null;
         },
         validator: (value) {
-          if (value!.isEmpty && !errors.contains(kEmailNullError)) {
+          if (value.isEmpty && !errors.contains(kEmailNullError)) {
             setState(() {
               errors.add(kEmailNullError);
             });
@@ -134,7 +134,7 @@ class _SignFormState extends State<SignForm> {
   TextFormField buildPasswordFormField() {
     return TextFormField(
         obscureText: true,
-        onSaved: (newValue) => password = newValue!,
+        onSaved: (newValue) => password = newValue,
         onChanged: (value) {
           if (value.isNotEmpty && errors.contains(kPassNullError)) {
             setState(() {
@@ -148,7 +148,7 @@ class _SignFormState extends State<SignForm> {
           return null;
         },
         validator: (value) {
-          if (value!.isEmpty) {
+          if (value.isEmpty) {
             setState(() {
               errors.add(kPassNullError);
             });

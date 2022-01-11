@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:shop_app/routs.dart';
+import 'package:shop_app/screens/profile/profile_screen.dart';
 import 'package:shop_app/screens/splash/splash_screen.dart';
 import 'package:shop_app/theme.dart';
 
@@ -9,7 +10,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({Key key}) : super(key: key);
 
   // This widget is the root of your application.
   @override

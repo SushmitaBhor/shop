@@ -8,7 +8,7 @@ import 'package:shop_app/size_config.dart';
 import '../../../constants.dart';
 
 class Body extends StatelessWidget {
-  const Body({Key? key}) : super(key: key);
+  const Body({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class Body extends StatelessWidget {
           child: Column(
             children: [
               SizedBox(
-                height: SizeConfig.screenHeight! * 0.04,
+                height: SizeConfig.screenHeight * 0.04,
               ),
               Text(
                 'Forgot Password',
@@ -34,7 +34,7 @@ class Body extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
               SizedBox(
-                height: SizeConfig.screenHeight! * 0.1,
+                height: SizeConfig.screenHeight * 0.1,
               ),
               ForgotPassForm()
             ],
@@ -46,7 +46,7 @@ class Body extends StatelessWidget {
 }
 
 class ForgotPassForm extends StatefulWidget {
-  const ForgotPassForm({Key? key}) : super(key: key);
+  const ForgotPassForm({Key key}) : super(key: key);
 
   @override
   _ForgotPassFormState createState() => _ForgotPassFormState();
@@ -55,7 +55,7 @@ class ForgotPassForm extends StatefulWidget {
 class _ForgotPassFormState extends State<ForgotPassForm> {
   final _formKey = GlobalKey<FormState>();
   List<String> errors = [];
-  late String email;
+  String email;
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -64,13 +64,13 @@ class _ForgotPassFormState extends State<ForgotPassForm> {
         children: [
           TextFormField(
             keyboardType: TextInputType.emailAddress,
-            onSaved: (newValue) => email = newValue!,
+            onSaved: (newValue) => email = newValue,
             onChanged: (value) {
               if (value.isNotEmpty && !errors.contains(kEmailNullError)) {
                 setState(() {
                   errors.remove(kEmailNullError);
                 });
-              } else if (!emailValidationRegExp.hasMatch(value) &&
+              } else if (emailValidationRegExp.hasMatch(value) &&
                   !errors.contains(kInvalidEmailError)) {
                 setState(() {
                   errors.remove(kInvalidEmailError);
@@ -79,7 +79,7 @@ class _ForgotPassFormState extends State<ForgotPassForm> {
               return null;
             },
             validator: (value) {
-              if (value!.isEmpty && !errors.contains(kEmailNullError)) {
+              if (value.isEmpty && !errors.contains(kEmailNullError)) {
                 setState(() {
                   errors.add(kEmailNullError);
                 });
@@ -109,15 +109,15 @@ class _ForgotPassFormState extends State<ForgotPassForm> {
             errors: errors,
           ),
           SizedBox(
-            height: SizeConfig.screenHeight! * 0.1,
+            height: SizeConfig.screenHeight * 0.1,
           ),
           DefaultButton(
               text: "Continue",
               press: () {
-                if (_formKey.currentState!.validate()) {}
+                if (_formKey.currentState.validate()) {}
               }),
           SizedBox(
-            height: SizeConfig.screenHeight! * 0.1,
+            height: SizeConfig.screenHeight * 0.1,
           ),
           NoAccountText()
         ],

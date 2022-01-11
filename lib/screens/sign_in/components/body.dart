@@ -10,7 +10,7 @@ import '../components/sign_form.dart';
 import 'package:shop_app/size_config.dart';
 
 class Body extends StatelessWidget {
-  const Body({Key? key}) : super(key: key);
+  const Body({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class Body extends StatelessWidget {
           child: Column(
             children: [
               SizedBox(
-                height: SizeConfig.screenHeight! * 0.04,
+                height: SizeConfig.screenHeight * 0.04,
               ),
               Text(
                 "Welcome Back",
@@ -38,11 +38,11 @@ class Body extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
               SizedBox(
-                height: SizeConfig.screenHeight! * 0.08,
+                height: SizeConfig.screenHeight * 0.08,
               ),
               SignForm(),
               SizedBox(
-                height: SizeConfig.screenHeight! * 0.08,
+                height: SizeConfig.screenHeight * 0.08,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,

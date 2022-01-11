@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import './body.dart';
 
 class SignUpscreen extends StatelessWidget {
-  const SignUpscreen({Key? key}) : super(key: key);
+  const SignUpscreen({Key key}) : super(key: key);
   static String routeName = "/sign_up";
   @override
   Widget build(BuildContext context) {
